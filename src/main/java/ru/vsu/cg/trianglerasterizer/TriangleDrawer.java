@@ -23,10 +23,17 @@ public class TriangleDrawer {
     private double wx1;
     private double wx2;
 
+    private Interpolator interpolator;
+
+    private Color color1;
+    private Color color2;
+    private Color color3;
+
     /*private double dx1left;
     private double dx1right;*/
 
-    public TriangleDrawer(Triangle triangle, GraphicsContext graphicsContext) {
+    public TriangleDrawer(Triangle triangle, GraphicsContext graphicsContext,
+                          Color color1, Color color2, Color color3) {
         this.pixelWriter = graphicsContext.getPixelWriter();
         this.triangle = triangle;
 
@@ -35,7 +42,12 @@ public class TriangleDrawer {
         p2 = points[1];
         p3 = points[2];
 
+        this.color1 = color1;
+        this.color2 = color2;
+        this.color3 = color3;
+
         this.graphicsContext = graphicsContext;
+        interpolator = new Interpolator();
     }
 
     public void draw() {
@@ -97,7 +109,9 @@ public class TriangleDrawer {
 
         for (int i = p1.y; i < p2.y; i ++) {
             for (int j = (int) Math.round(wx1); j <= (int) Math.round(wx2); j ++) {
-                pixelWriter.setColor(j, i, Color.BLACK);
+                Color color = interpolator.getPixelColor(triangle.getPoints(),
+                        color1, color2, color3, new Point(j, i));
+                pixelWriter.setColor(j, i, color);
             }
 
             wx1 += dxLeft;
@@ -121,7 +135,9 @@ public class TriangleDrawer {
 
         for (int i = p2.y; i <= p3.y; i++) {
             for (int j = (int) Math.round(wx1); j <= (int) Math.round(wx2); j++) {
-                pixelWriter.setColor(j, i, Color.BLACK);
+                Color color = interpolator.getPixelColor(triangle.getPoints(),
+                        color1, color2, color3, new Point(j, i));
+                pixelWriter.setColor(j, i, color);
             }
 
             wx1 += dxLeft;

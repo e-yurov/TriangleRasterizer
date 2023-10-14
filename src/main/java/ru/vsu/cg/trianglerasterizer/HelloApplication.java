@@ -10,10 +10,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        long start = new Date().getTime();
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Canvas canvas = new Canvas(500, 500);
@@ -23,7 +25,11 @@ public class HelloApplication extends Application {
 
         Triangle triangle0 = new Triangle(100, 100, 200, 100, 300, 100);
         Triangle triangle1 = new Triangle(100, 300, 250, 100, 450, 400);
-        TriangleDrawer drawer = new TriangleDrawer(triangle1, canvas.getGraphicsContext2D());
+        Triangle triangle2 = new Triangle(100, 300, 250, 400, 450, 250);
+        Triangle triangle3 = new Triangle(200, 100, 100, 101, 300, 102);
+        Triangle triangle4 = new Triangle(250, 100, 100, 400, 450, 250);
+        TriangleDrawer drawer = new TriangleDrawer(triangle2, canvas.getGraphicsContext2D(),
+                Color.RED, Color.LIME, Color.BLUE);
 
         //canvas.getGraphicsContext2D().strokeLine(100, 100, 200, 200);
 
@@ -33,6 +39,7 @@ public class HelloApplication extends Application {
 
         drawer.draw();
         drawCoordinates(canvas.getGraphicsContext2D(), 500, 500);
+        System.out.println(new Date().getTime() - start);
     }
 
     private void drawCoordinates(GraphicsContext graphicsContext, int width, int height) {
