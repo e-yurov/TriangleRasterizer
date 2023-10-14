@@ -35,9 +35,13 @@ public class Interpolator {
     }
 
     private Color interpolate() {
-        double red = Math.abs(alpha * color1.getRed() + beta * color2.getRed() + gamma * color3.getRed());
-        double green = Math.abs(alpha * color1.getGreen() + beta * color2.getGreen() + gamma * color3.getGreen());
-        double blue = Math.abs(alpha * color1.getBlue() + beta * color2.getBlue() + gamma * color3.getBlue());
+        double red = alpha * color1.getRed() + beta * color2.getRed() + gamma * color3.getRed();
+        double green = alpha * color1.getGreen() + beta * color2.getGreen() + gamma * color3.getGreen();
+        double blue = alpha * color1.getBlue() + beta * color2.getBlue() + gamma * color3.getBlue();
+
+        red = (red < 0) ? 0.0D : red;
+        green = (green < 0) ? 0.0D : green;
+        blue = (blue < 0) ? 0.0D : blue;
 
         return Color.color(red, green, blue);
     }
@@ -47,6 +51,6 @@ public class Interpolator {
                 ((p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y));
         beta = (double) ((p3.y - p1.y) * (p.x - p3.x) + (p1.x - p3.x) * (p.y - p3.y)) /
                 ((p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y));
-        gamma = 1 - alpha - beta;
+        gamma = 1.0D - alpha - beta;
     }
 }
