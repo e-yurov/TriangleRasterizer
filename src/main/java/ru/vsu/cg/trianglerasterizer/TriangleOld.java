@@ -2,10 +2,10 @@ package ru.vsu.cg.trianglerasterizer;
 
 import java.awt.*;
 
-public class Triangle {
+public class TriangleOld {
     private Point[] points;
 
-    public Triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+    public TriangleOld(int x1, int y1, int x2, int y2, int x3, int y3) {
         points = new Point[3];
         points[0] = new Point(x1, y1);
         points[1] = new Point(x2, y2);

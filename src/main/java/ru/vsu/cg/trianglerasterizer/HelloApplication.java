@@ -1,13 +1,14 @@
 package ru.vsu.cg.trianglerasterizer;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import ru.vsu.cg.trianglerasterizer.triangle.Triangle;
+import ru.vsu.cg.trianglerasterizer.triangle.TriangleDrawer;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,15 +25,28 @@ public class HelloApplication extends Application {
         Pane root = new Pane(canvas);
         Scene scene = new Scene(root, 500, 500);
 
-        inliningTest();
+        //inliningTest();
 
-        Triangle triangle0 = new Triangle(100, 100, 200, 100, 300, 100);
-        Triangle triangle1 = new Triangle(100, 300, 250, 100, 450, 300);
-        Triangle triangle2 = new Triangle(100, 300, 250, 400, 450, 250);
-        Triangle triangle3 = new Triangle(200, 100, 100, 101, 300, 102);
-        Triangle triangle4 = new Triangle(250, 100, 100, 400, 450, 250);
+        /*TriangleOld triangle0 = new TriangleOld(100, 100, 200, 100, 300, 100);
+        TriangleOld triangle1 = new TriangleOld(100, 300, 250, 100, 450, 300);
+        TriangleOld triangle2 = new TriangleOld(100, 300, 250, 400, 450, 250);
+        TriangleOld triangle3 = new TriangleOld(200, 100, 100, 101, 300, 102);
+        TriangleOld triangle4 = new TriangleOld(250, 100, 100, 400, 450, 250);
         TriangleDrawer drawer = new TriangleDrawer(triangle1, canvas.getGraphicsContext2D(),
-                Color.RED, Color.LIME, Color.BLUE);
+                Color.RED, Color.LIME, Color.BLUE);*/
+
+        TriangleDrawer drawer = new TriangleDrawer(canvas.getGraphicsContext2D().getPixelWriter());
+        Triangle triangle0 = new Triangle(
+                100, 400, Color.RED,
+                250, 100, Color.BLUE,
+                400, 400, Color.LIME
+        );
+        Triangle triangle1 = new Triangle(
+                100, 300, Color.RED,
+                250, 100, Color.BLUE,
+                400, 400, Color.LIME
+        );
+        drawer.draw(triangle1);
 
         //canvas.getGraphicsContext2D().strokeLine(100, 100, 200, 200);
 
@@ -40,9 +54,9 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        drawer.draw();
+        //drawer.draw();
         drawCoordinates(canvas.getGraphicsContext2D(), 500, 500);
-        System.out.println(new Date().getTime() - start);
+        //System.out.println(new Date().getTime() - start);
     }
 
     private void drawCoordinates(GraphicsContext graphicsContext, int width, int height) {
@@ -58,9 +72,9 @@ public class HelloApplication extends Application {
         launch();
     }
 
-    private void inliningTest() {
+    /*private void inliningTest() {
         long start = System.currentTimeMillis();
-        Triangle triangle = new Triangle(100, 300, 250, 100, 450, 300);
+        TriangleOld triangle = new TriangleOld(100, 300, 250, 100, 450, 300);
 
         TriangleDrawer drawer = new TriangleDrawer(triangle, canvas.getGraphicsContext2D(),
                 Color.RED, Color.LIME, Color.BLUE);
@@ -70,5 +84,5 @@ public class HelloApplication extends Application {
         }
         long end = System.currentTimeMillis();
         System.out.println("Draw:" + (end - start));
-    }
+    }*/
 }

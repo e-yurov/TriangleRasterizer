@@ -1,18 +1,18 @@
 package ru.vsu.cg.trianglerasterizer;
 
-import java.util.Date;
-
 public class Test {
     public static void main(String[] args) {
         //System.out.println(castToBits());
         castToBitsTest();
         ifTest();
         ternaryTest();
+        mathAbsTest();
+        mathCeilTest();
     }
 
     private static void castToBitsTest() {
         long start = System.nanoTime();
-        for (long i = 0; i < 10_000_000_000L; i++) {
+        for (long i = 0; i < 1_000_000_000L; i++) {
             castToBits();
         }
         long end = System.nanoTime();
@@ -21,7 +21,7 @@ public class Test {
 
     private static void ifTest() {
         long start = System.nanoTime();
-        for (long i = 0; i < 10_000_000_000L; i++) {
+        for (long i = 0; i < 1_000_000_000L; i++) {
             castToBits();
         }
         long end = System.nanoTime();
@@ -30,11 +30,29 @@ public class Test {
 
     private static void ternaryTest() {
         long start = System.nanoTime();
-        for (long i = 0; i < 10_000_000_000L; i++) {
+        for (long i = 0; i < 1_000_000_000L; i++) {
             castToBits();
         }
         long end = System.nanoTime();
         System.out.println("Ternary test:" + ((end - start) / 1_000_000));
+    }
+
+    private static void mathAbsTest() {
+        long start = System.nanoTime();
+        for (long i = 0; i < 1_000_000_000L; i++) {
+            abs();
+        }
+        long end = System.nanoTime();
+        System.out.println("Math.abs test:" + ((end - start) / 1_000_000));
+    }
+
+    private static void mathCeilTest() {
+        long start = System.nanoTime();
+        for (long i = 0; i < 1_000_000_000L; i++) {
+            ceilTest();
+        }
+        long end = System.nanoTime();
+        System.out.println("Math.ceil test:" + ((end - start) / 1_000_000));
     }
 
     private static double castToBits() {
@@ -66,5 +84,15 @@ public class Test {
         }
 
         return str;
+    }
+
+    private static double abs() {
+        double d = -123.0D;
+        return Math.abs(d);
+    }
+
+    private static double ceilTest() {
+        double d = 0.17D;
+        return d * Math.ceil(d);
     }
 }
