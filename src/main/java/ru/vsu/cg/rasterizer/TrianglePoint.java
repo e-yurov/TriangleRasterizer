@@ -1,4 +1,4 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.rasterizer;
 
 import javafx.scene.paint.Color;
 

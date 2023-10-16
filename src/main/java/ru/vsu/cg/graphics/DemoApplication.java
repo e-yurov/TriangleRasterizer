@@ -1,14 +1,15 @@
 package ru.vsu.cg.graphics;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.vsu.cg.trianglerasterizer.Triangle;
-import ru.vsu.cg.trianglerasterizer.TriangleRasterizer;
+import ru.vsu.cg.rasterizer.Triangle;
+import ru.vsu.cg.rasterizer.TriangleRasterizer;
 
 import java.io.IOException;
 import java.util.Date;
@@ -18,12 +19,13 @@ public class DemoApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         long start = new Date().getTime();
-        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DemoApplication.class.getResource("demo-view.fxml"));
         //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+
         canvas = new Canvas(500, 500);
 
         Pane root = new Pane(canvas);
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 1760, 990);
 
         //inliningTest();
 
@@ -60,7 +62,7 @@ public class DemoApplication extends Application {
         stage.show();
 
         //drawer.draw();
-        drawCoordinates(canvas.getGraphicsContext2D(), 500, 500);
+        //drawCoordinates(canvas.getGraphicsContext2D(), 500, 500);
         //System.out.println(new Date().getTime() - start);
     }
 

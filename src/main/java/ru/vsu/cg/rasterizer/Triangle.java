@@ -1,4 +1,4 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.rasterizer;
 
 import javafx.scene.paint.Color;
 
@@ -53,5 +53,9 @@ public class Triangle {
 
     public TrianglePoint getP3() {
         return p3;
+    }
+
+    public TrianglePoint[] getPoints() {
+        return new TrianglePoint[]{p1, p2, p3};
     }
 }

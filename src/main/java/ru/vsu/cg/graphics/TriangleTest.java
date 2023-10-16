@@ -3,8 +3,8 @@ package ru.vsu.cg.graphics;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
-import ru.vsu.cg.trianglerasterizer.Triangle;
-import ru.vsu.cg.trianglerasterizer.TriangleRasterizer;
+import ru.vsu.cg.rasterizer.Triangle;
+import ru.vsu.cg.rasterizer.TriangleRasterizer;
 
 public class TriangleTest {
     public static void main(String[] args) {
@@ -24,13 +24,17 @@ public class TriangleTest {
                 150, 100, Color.BLUE,
                 200, 120, Color.LIME
         );
-
-        long iterations = 10_000L;
+        Triangle pixel = new Triangle(
+                100, 100, Color.RED,
+                100, 100, Color.BLUE,
+                100, 100, Color.LIME
+        );
+        long iterations = 10_000_000L;
         long startTime = System.currentTimeMillis();
         for (long i = 0; i < iterations; i++) {
-            drawer.rasterize(triangle2);
+            drawer.rasterize(pixel);
         }
         long endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime);
+        System.out.println(iterations + " triangles drawing time: " + (endTime - startTime));
     }
 }

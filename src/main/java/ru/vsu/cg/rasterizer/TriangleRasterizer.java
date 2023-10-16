@@ -1,4 +1,4 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.rasterizer;
 
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
@@ -23,17 +23,15 @@ public class TriangleRasterizer {
         TrianglePoint p2 = triangle.getP2();
         TrianglePoint p3 = triangle.getP3();
 
-        double dx12 = calcPointDiff(p1, p2);
-        double dx13 = calcPointDiff(p1, p3);
-        double dx23 = calcPointDiff(p2, p3);
+        double dx12 = calculateSideXIncrement(p1, p2);
+        double dx13 = calculateSideXIncrement(p1, p3);
+        double dx23 = calculateSideXIncrement(p2, p3);
 
-        calculatePreUpper(dx12, dx13, p1.x);
-        //drawTopPart(triangle.getP1(), triangle.getP2(), triangle.getP3());
+        computeBeforeUpperPart(dx12, dx13, p1.x);
         drawPart(p1, p2, p3, p1.y, p2.y - 1);
 
-        calculatePreLower(dx13, dx23, p1, p2);
+        computeBeforeLowerPart(dx13, dx23, p1, p2);
         drawPart(p1, p2, p3, p2.y, p3.y);
-        //drawBottomPart(triangle.getP1(), triangle.getP2(), triangle.getP3());
     }
 
     public void rasterize(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3) {
@@ -52,25 +50,23 @@ public class TriangleRasterizer {
         this.rasterize(triangle);
     }
 
-    private void calculatePreUpper(double dx12, double dx13, int wx) {
+    private void computeBeforeUpperPart(double dx12, double dx13, int wx) {
         wx1 = wx;
         wx2 = wx1;
 
         dxLeft = dx12;
         dxRight = dx13;
-
         if (dx13 < dx12) {
             dxLeft = dx13;
             dxRight = dx12;
         }
     }
 
-    private void calculatePreLower(double dx13, double dx23, TrianglePoint p1, TrianglePoint p2) {
+    private void computeBeforeLowerPart(double dx13, double dx23, TrianglePoint p1, TrianglePoint p2) {
         if (p1.y == p2.y) {
             wx1 = p1.x;
             wx2 = p2.x;
         }
-
 
         dxLeft = dx13;
         dxRight = dx23;
@@ -80,21 +76,9 @@ public class TriangleRasterizer {
         }
     }
 
-    private double calcPointDiff(TrianglePoint first, TrianglePoint second) {
+    private double calculateSideXIncrement(TrianglePoint first, TrianglePoint second) {
         return (first.y == second.y) ? 0.0D : (double) (second.x - first.x) / (second.y - first.y);
     }
-
-    /*private void drawTopPart(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3) {
-        for (int y = p1.y; y < p2.y; y++, wx1 += dxLeft, wx2 += dxRight) {
-            drawLine(p1, p2, p3, y);
-        }
-    }
-
-    private void drawBottomPart(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3) {
-        for (int y = p2.y; y <= p3.y; y++, wx1 += dxLeft, wx2 += dxRight) {
-            drawLine(p1, p2, p3, y);
-        }
-    }*/
 
     private void drawPart(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int leftY, int rightY) {
         for (int y = leftY; y <= rightY; y++, wx1 += dxLeft, wx2 += dxRight) {
