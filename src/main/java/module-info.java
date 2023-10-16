@@ -4,8 +4,8 @@ module ru.vsu.cg.trianglerasterizer {
     requires java.desktop;
 
 
-    opens ru.vsu.cg.trianglerasterizer to javafx.fxml;
+    exports ru.vsu.cg.graphics;
+    opens ru.vsu.cg.graphics to javafx.fxml;
     exports ru.vsu.cg.trianglerasterizer;
-    exports ru.vsu.cg.trianglerasterizer.triangle;
-    opens ru.vsu.cg.trianglerasterizer.triangle to javafx.fxml;
+    opens ru.vsu.cg.trianglerasterizer to javafx.fxml;
 }

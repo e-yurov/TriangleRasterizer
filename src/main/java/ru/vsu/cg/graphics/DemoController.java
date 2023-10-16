@@ -1,9 +1,9 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.graphics;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class DemoController {
     @FXML
     private Label welcomeText;
 

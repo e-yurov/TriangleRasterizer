@@ -1,4 +1,4 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.graphics;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -7,13 +7,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ru.vsu.cg.trianglerasterizer.triangle.Triangle;
-import ru.vsu.cg.trianglerasterizer.triangle.TriangleDrawer;
+import ru.vsu.cg.trianglerasterizer.Triangle;
+import ru.vsu.cg.trianglerasterizer.TriangleRasterizer;
 
 import java.io.IOException;
 import java.util.Date;
 
-public class HelloApplication extends Application {
+public class DemoApplication extends Application {
     Canvas canvas;
     @Override
     public void start(Stage stage) throws IOException {
@@ -35,18 +35,23 @@ public class HelloApplication extends Application {
         TriangleDrawer drawer = new TriangleDrawer(triangle1, canvas.getGraphicsContext2D(),
                 Color.RED, Color.LIME, Color.BLUE);*/
 
-        TriangleDrawer drawer = new TriangleDrawer(canvas.getGraphicsContext2D().getPixelWriter());
+        TriangleRasterizer drawer = new TriangleRasterizer(canvas.getGraphicsContext2D().getPixelWriter());
         Triangle triangle0 = new Triangle(
                 100, 400, Color.RED,
                 250, 100, Color.BLUE,
                 400, 400, Color.LIME
         );
         Triangle triangle1 = new Triangle(
-                100, 300, Color.RED,
-                250, 100, Color.BLUE,
-                400, 400, Color.LIME
+                100, 300, Color.color(1.0D, 0.0D, 0.0D),
+                250, 100, Color.color(1.0D, 0.2D, 0.5D),
+                400, 400, Color.color(1.0D, 0.4D, 1.D)
         );
-        drawer.draw(triangle1);
+        Triangle triangleSmall = new Triangle(
+                100, 300, Color.RED,
+                150, 250, Color.BLUE,
+                150, 300, Color.LIME
+        );
+        drawer.rasterize(triangle1);
 
         //canvas.getGraphicsContext2D().strokeLine(100, 100, 200, 200);
 
@@ -71,18 +76,4 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-    /*private void inliningTest() {
-        long start = System.currentTimeMillis();
-        TriangleOld triangle = new TriangleOld(100, 300, 250, 100, 450, 300);
-
-        TriangleDrawer drawer = new TriangleDrawer(triangle, canvas.getGraphicsContext2D(),
-                Color.RED, Color.LIME, Color.BLUE);
-
-        for (long i = 0; i < 1000L; i++) {
-            drawer.draw();
-        }
-        long end = System.currentTimeMillis();
-        System.out.println("Draw:" + (end - start));
-    }*/
 }

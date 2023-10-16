@@ -1,4 +1,4 @@
-package ru.vsu.cg.trianglerasterizer;
+package ru.vsu.cg.graphics;
 
 public class Test {
     public static void main(String[] args) {

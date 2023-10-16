@@ -1,11 +1,11 @@
-package ru.vsu.cg.trianglerasterizer.triangle;
+package ru.vsu.cg.trianglerasterizer;
 
 import javafx.scene.paint.Color;
 
 public class TrianglePoint {
-    final int x;
-    final int y;
-    final Color color;
+    int x;
+    int y;
+    Color color;
 
     public TrianglePoint(int x, int y, Color color) {
         this.x = x;
@@ -17,11 +17,23 @@ public class TrianglePoint {
         return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public int getY() {
         return y;
     }
 
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
