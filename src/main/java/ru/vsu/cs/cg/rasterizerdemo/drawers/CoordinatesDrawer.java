@@ -1,4 +1,4 @@
-package ru.vsu.cg.rasterizerdemo.graphics.drawers;
+package ru.vsu.cs.cg.rasterizerdemo.drawers;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -53,5 +53,13 @@ public class CoordinatesDrawer {
             graphicsContext.setStroke(greyStroke);
             graphicsContext.strokeLine(leftXIndent, y, leftXIndent + coordinatesWidth, y);
         }
+    }
+
+    public int getLeftXIndent() {
+        return leftXIndent;
+    }
+
+    public int getTopYIndent() {
+        return topYIndent;
     }
 }

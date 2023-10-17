@@ -1,10 +1,10 @@
-package ru.vsu.cg.rasterizerdemo.benchmarktest;
+package ru.vsu.cs.cg.rasterizerdemo.benchmarktest;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
-import ru.vsu.cg.rasterizerdemo.rasterizer.Triangle;
-import ru.vsu.cg.rasterizerdemo.rasterizer.TriangleRasterizer;
+import ru.vsu.cs.cg.rasterizerdemo.rasterizer.Triangle;
+import ru.vsu.cs.cg.rasterizerdemo.rasterizer.TriangleRasterizer;
 
 public class TriangleTest {
     public static void main(String[] args) {

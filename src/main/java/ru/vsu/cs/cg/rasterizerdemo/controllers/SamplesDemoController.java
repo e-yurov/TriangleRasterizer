@@ -1,10 +1,10 @@
-package ru.vsu.cg.rasterizerdemo.graphics;
+package ru.vsu.cs.cg.rasterizerdemo.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
-import ru.vsu.cg.rasterizerdemo.graphics.drawers.CoordinatesDrawer;
-import ru.vsu.cg.rasterizerdemo.graphics.drawers.TriangleSamplesDrawer;
+import ru.vsu.cs.cg.rasterizerdemo.drawers.CoordinatesDrawer;
+import ru.vsu.cs.cg.rasterizerdemo.drawers.TriangleSamplesDrawer;
 
 public class SamplesDemoController {
     @FXML
@@ -20,6 +20,7 @@ public class SamplesDemoController {
         coordinatesDrawer.drawCoordinates();
 
         TriangleSamplesDrawer triangleSamplesDrawer = new TriangleSamplesDrawer();
-        triangleSamplesDrawer.drawTriangles(canvas.getGraphicsContext2D().getPixelWriter(), 50, 50);
+        triangleSamplesDrawer.drawTriangles(canvas.getGraphicsContext2D().getPixelWriter(),
+                coordinatesDrawer.getLeftXIndent(), coordinatesDrawer.getTopYIndent());
     }
 }

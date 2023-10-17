@@ -1,9 +1,9 @@
-package ru.vsu.cg.rasterizerdemo.graphics.drawers;
+package ru.vsu.cs.cg.rasterizerdemo.drawers;
 
 import javafx.scene.image.PixelWriter;
-import ru.vsu.cg.rasterizerdemo.rasterizer.Triangle;
-import ru.vsu.cg.rasterizerdemo.rasterizer.TrianglePoint;
-import ru.vsu.cg.rasterizerdemo.rasterizer.TriangleRasterizer;
+import ru.vsu.cs.cg.rasterizerdemo.rasterizer.Triangle;
+import ru.vsu.cs.cg.rasterizerdemo.rasterizer.TrianglePoint;
+import ru.vsu.cs.cg.rasterizerdemo.rasterizer.TriangleRasterizer;
 
 import java.util.ArrayList;
 import java.util.List;

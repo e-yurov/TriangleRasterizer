@@ -1,4 +1,4 @@
-package ru.vsu.cg.rasterizerdemo.graphics;
+package ru.vsu.cs.cg.rasterizerdemo.applications;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import java.io.IOException;
 public class SamplesDemoApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SamplesDemoApplication.class.getResource("demo-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SamplesDemoApplication.class.getResource("samples-demo-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1760, 990);
         stage.setTitle("Samples");
         stage.setScene(scene);

@@ -4,6 +4,6 @@
 <?import javafx.scene.canvas.Canvas?>
 
 <AnchorPane fx:id="anchorPane" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.vsu.cg.rasterizerdemo.graphics.SamplesDemoController">
+            fx:controller="ru.vsu.cs.cg.rasterizerdemo.controllers.SamplesDemoController">
     <Canvas fx:id="canvas" width="1760" height="990" AnchorPane.topAnchor="0.0"/>
 </AnchorPane>
