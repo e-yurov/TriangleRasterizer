@@ -1,10 +1,10 @@
-package ru.vsu.cg.graphics;
+package ru.vsu.cg.rasterizerdemo.benchmarktest;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
-import ru.vsu.cg.rasterizer.Triangle;
-import ru.vsu.cg.rasterizer.TriangleRasterizer;
+import ru.vsu.cg.rasterizerdemo.rasterizer.Triangle;
+import ru.vsu.cg.rasterizerdemo.rasterizer.TriangleRasterizer;
 
 public class TriangleTest {
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class TriangleTest {
         long iterations = 10_000_000L;
         long startTime = System.currentTimeMillis();
         for (long i = 0; i < iterations; i++) {
-            drawer.rasterize(pixel);
+            drawer.rasterize(triangle2);
         }
         long endTime = System.currentTimeMillis();
         System.out.println(iterations + " triangles drawing time: " + (endTime - startTime));

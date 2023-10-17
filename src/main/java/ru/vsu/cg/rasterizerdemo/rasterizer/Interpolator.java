@@ -1,4 +1,4 @@
-package ru.vsu.cg.rasterizer;
+package ru.vsu.cg.rasterizerdemo.rasterizer;
 
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;

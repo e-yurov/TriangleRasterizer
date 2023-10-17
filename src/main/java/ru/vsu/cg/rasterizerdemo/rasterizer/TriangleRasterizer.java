@@ -1,4 +1,4 @@
-package ru.vsu.cg.rasterizer;
+package ru.vsu.cg.rasterizerdemo.rasterizer;
 
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
@@ -17,7 +17,7 @@ public class TriangleRasterizer {
     }
 
     public void rasterize(Triangle triangle) {
-        triangle.sortPointsByY();
+        Utils.sortTrianglePointsByY(triangle);
 
         TrianglePoint p1 = triangle.getP1();
         TrianglePoint p2 = triangle.getP2();

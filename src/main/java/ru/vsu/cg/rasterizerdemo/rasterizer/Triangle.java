@@ -1,4 +1,4 @@
-package ru.vsu.cg.rasterizer;
+package ru.vsu.cg.rasterizerdemo.rasterizer;
 
 import javafx.scene.paint.Color;
 
@@ -23,36 +23,36 @@ public class Triangle {
         );
     }
 
-    public void sortPointsByY() {
-        TrianglePoint temporal = p1;
-
-        if (p2.y < p1.y) {
-            p1 = p2;
-            p2 = temporal;
-        }
-
-        if (p3.y < p1.y) {
-            p1 = p3;
-            p3 = temporal;
-        }
-
-        if (p3.y < p2.y) {
-            temporal = p2;
-            p2 = p3;
-            p3 = temporal;
-        }
+    public static Triangle withRandomColor(int x1, int y1, int x2, int y2, int x3, int y3) {
+        return new Triangle(
+                x1, y1, Utils.getRandomColor(),
+                x2, y2, Utils.getRandomColor(),
+                x3, y3, Utils.getRandomColor()
+        );
     }
 
     public TrianglePoint getP1() {
         return p1;
     }
 
+    public void setP1(TrianglePoint p1) {
+        this.p1 = p1;
+    }
+
     public TrianglePoint getP2() {
         return p2;
     }
 
+    public void setP2(TrianglePoint p2) {
+        this.p2 = p2;
+    }
+
     public TrianglePoint getP3() {
         return p3;
+    }
+
+    public void setP3(TrianglePoint p3) {
+        this.p3 = p3;
     }
 
     public TrianglePoint[] getPoints() {

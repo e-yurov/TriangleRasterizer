@@ -1,4 +1,4 @@
-package ru.vsu.cg.graphics;
+package ru.vsu.cg.rasterizerdemo.graphics.drawers;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
