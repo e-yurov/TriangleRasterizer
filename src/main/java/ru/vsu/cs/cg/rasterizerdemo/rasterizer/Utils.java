@@ -2,7 +2,7 @@ package ru.vsu.cs.cg.rasterizerdemo.rasterizer;
 
 import javafx.scene.paint.Color;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
     public static void sortTrianglePointsByY(Triangle triangle) {
@@ -28,7 +28,7 @@ public class Utils {
     }
 
     public static Color getRandomColor() {
-        Random random = new Random();
+        ThreadLocalRandom random = ThreadLocalRandom.current();
         return Color.color(random.nextDouble(0.0D, 1.0D),
                 random.nextDouble(0.0D, 1.0D), random.nextDouble(0.0D, 1.0D));
     }

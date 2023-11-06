@@ -29,10 +29,10 @@ public class TriangleTest {
                 100, 100, Color.BLUE,
                 100, 100, Color.LIME
         );
-        long iterations = 10_000_000L;
+        long iterations = 10_000L;
         long startTime = System.currentTimeMillis();
         for (long i = 0; i < iterations; i++) {
-            drawer.rasterize(triangle2);
+            drawer.rasterize(pixel);
         }
         long endTime = System.currentTimeMillis();
         System.out.println(iterations + " triangles drawing time: " + (endTime - startTime));

@@ -5,12 +5,16 @@ import javafx.scene.paint.Color;
 public class TrianglePoint {
     int x;
     int y;
-    Color color;
+    private Color color;
 
     public TrianglePoint(int x, int y, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;
+    }
+
+    public TrianglePoint(int x, int y) {
+        this(x, y, Color.BLACK);
     }
 
     public int getX() {

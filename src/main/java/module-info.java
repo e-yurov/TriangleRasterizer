@@ -2,9 +2,6 @@ module ru.vsu.cg.trianglerasterizer {
     requires javafx.controls;
     requires javafx.fxml;
 
-
-    exports ru.vsu.cs.cg.rasterizerdemo.benchmarktest;
-    opens ru.vsu.cs.cg.rasterizerdemo.benchmarktest to javafx.fxml;
     exports ru.vsu.cs.cg.rasterizerdemo.drawers;
     opens ru.vsu.cs.cg.rasterizerdemo.drawers to javafx.fxml;
     exports ru.vsu.cs.cg.rasterizerdemo.applications;

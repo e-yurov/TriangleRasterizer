@@ -31,7 +31,7 @@ public class Interpolator {
         pixelWriter.setArgb(x, y, argb);
     }
 
-    private double[] calculateBarycentric(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int x, int y) {
+    public static double[] calculateBarycentric(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int x, int y) {
         double[] coordinates = new double[3];
         int denominator = (p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y);
         coordinates[0] = (double) ((p2.y - p3.y) * (x - p3.x) + (p3.x - p2.x) * (y - p3.y)) / denominator;
@@ -39,5 +39,17 @@ public class Interpolator {
         coordinates[2] = 1.0D - coordinates[0] - coordinates[1];
 
         return coordinates;
+    }
+
+    public static double[] calculateBarycentric(int x1, int y1,
+                                                int x2, int y2,
+                                                int x3, int y3,
+                                                int x, int y) {
+        return calculateBarycentric(
+                new TrianglePoint(x1, y1),
+                new TrianglePoint(x2, y2),
+                new TrianglePoint(x3, y3),
+                x, y
+        );
     }
 }
