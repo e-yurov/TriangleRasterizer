@@ -13,9 +13,9 @@ public class Triangle {
         this.p3 = p3;
     }
 
-    public Triangle(int x1, int y1, Color color1,
-                    int x2, int y2, Color color2,
-                    int x3, int y3, Color color3) {
+    public Triangle(float x1, float y1, Color color1,
+                    float x2, float y2, Color color2,
+                    float x3, float y3, Color color3) {
         this(
                 new TrianglePoint(x1, y1, color1),
                 new TrianglePoint(x2, y2, color2),
@@ -23,11 +23,19 @@ public class Triangle {
         );
     }
 
-    public static Triangle withRandomColor(int x1, int y1, int x2, int y2, int x3, int y3) {
+    public static Triangle withRandomColor(float x1, float y1, float x2, float y2, float x3, float y3) {
         return new Triangle(
                 x1, y1, Utils.getRandomColor(),
                 x2, y2, Utils.getRandomColor(),
                 x3, y3, Utils.getRandomColor()
+        );
+    }
+
+    public static Triangle rgb(float x1, float y1, float x2, float y2, float x3, float y3) {
+        return new Triangle(
+                x1, y1, Color.RED,
+                x2, y2, Color.GREEN,
+                x3, y3, Color.BLUE
         );
     }
 

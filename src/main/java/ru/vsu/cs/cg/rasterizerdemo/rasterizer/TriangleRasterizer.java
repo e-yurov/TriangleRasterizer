@@ -6,11 +6,11 @@ import javafx.scene.paint.Color;
 public class TriangleRasterizer {
     private final Interpolator interpolator;
 
-    private double wx1;
-    private double wx2;
+    private float wx1;
+    private float wx2;
 
-    private double dxLeft;
-    private double dxRight;
+    private float dxLeft;
+    private float dxRight;
 
     public TriangleRasterizer(PixelWriter pixelWriter) {
         interpolator = new Interpolator(pixelWriter);
@@ -23,15 +23,22 @@ public class TriangleRasterizer {
         TrianglePoint p2 = triangle.getP2();
         TrianglePoint p3 = triangle.getP3();
 
-        double dx12 = calculateSideXIncrement(p1, p2);
-        double dx13 = calculateSideXIncrement(p1, p3);
-        double dx23 = calculateSideXIncrement(p2, p3);
+        int x1 = (int) p1.x;
+        int y1 = (int) p1.y;
+        int x2 = (int) p2.x;
+        int y2 = (int) p2.y;
+        int x3 = (int) p3.x;
+        int y3 = (int) p3.y;
 
-        computeBeforeUpperPart(dx12, dx13, p1.x);
-        drawPart(p1, p2, p3, p1.y, p2.y - 1);
+        float dx12 = calculateSideXIncrement(x1, y1, x2, y2);
+        float dx13 = calculateSideXIncrement(x1, y1, x3, y3);
+        float dx23 = calculateSideXIncrement(x2, y2, x3, y3);
 
-        computeBeforeLowerPart(dx13, dx23, p1, p2);
-        drawPart(p1, p2, p3, p2.y, p3.y);
+        computeBeforeUpperPart(dx12, dx13, x1);
+        drawPart(p1, p2, p3, y1, y2 - 1);
+
+        computeBeforeLowerPart(dx13, dx23, x1, y1, x2, y2);
+        drawPart(p1, p2, p3, y2, y3);
     }
 
     public void rasterize(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3) {
@@ -39,9 +46,9 @@ public class TriangleRasterizer {
         this.rasterize(triangle);
     }
 
-    public void rasterize(int x1, int y1, Color color1,
-                          int x2, int y2, Color color2,
-                          int x3, int y3, Color color3) {
+    public void rasterize(float x1, float y1, Color color1,
+                          float x2, float y2, Color color2,
+                          float x3, float y3, Color color3) {
         Triangle triangle = new Triangle(
                 x1, y1, color1,
                 x2, y2, color2,
@@ -50,34 +57,40 @@ public class TriangleRasterizer {
         this.rasterize(triangle);
     }
 
-    private void computeBeforeUpperPart(double dx12, double dx13, int wx) {
+    private void computeBeforeUpperPart(float dx12, float dx13, float wx) {
         wx1 = wx;
         wx2 = wx1;
 
-        dxLeft = dx12;
-        dxRight = dx13;
         if (dx13 < dx12) {
             dxLeft = dx13;
             dxRight = dx12;
+            return;
         }
+        dxLeft = dx12;
+        dxRight = dx13;
     }
 
-    private void computeBeforeLowerPart(double dx13, double dx23, TrianglePoint p1, TrianglePoint p2) {
-        if (p1.y == p2.y) {
-            wx1 = p1.x;
-            wx2 = p2.x;
+    private void computeBeforeLowerPart(float dx13, float dx23, int x1, int y1, int x2, int y2) {
+        if (y1 == y2) {
+            wx1 = x1;
+            wx2 = x2;
+            if (wx1 > wx2) {
+                wx1 = x2;
+                wx2 = x1;
+            }
         }
 
-        dxLeft = dx13;
-        dxRight = dx23;
         if (dx13 < dx23) {
             dxLeft = dx23;
             dxRight = dx13;
+            return;
         }
+        dxLeft = dx13;
+        dxRight = dx23;
     }
 
-    private double calculateSideXIncrement(TrianglePoint first, TrianglePoint second) {
-        return (first.y == second.y) ? 0.0D : (double) (second.x - first.x) / (second.y - first.y);
+    private float calculateSideXIncrement(int x1, int y1, int x2, int y2) {
+        return (y1 == y2) ? 0.0F : (float) (x2 - x1) / (y2 - y1);
     }
 
     private void drawPart(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int leftY, int rightY) {
@@ -87,7 +100,7 @@ public class TriangleRasterizer {
     }
 
     private void drawLine(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int y) {
-        for (int x = (int) Math.round(wx1); x <= (int) Math.round(wx2); x++) {
+        for (int x = (int)(wx1); x <= (int)(wx2); x++) {
             interpolator.drawPixel(p1, p2, p3, x, y);
         }
     }
