@@ -38,11 +38,26 @@ public class Interpolator {
         return intColor;
     }
 
+    public static float clamp(float value) {
+        return Math.max(Math.min(value, 1F), 0F);
+    }
+
     public static float[] calculateBarycentric(TrianglePoint p1, TrianglePoint p2, TrianglePoint p3, int x, int y) {
         float[] coordinates = new float[3];
-        float denominator = (p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y);
-        coordinates[0] = ((p2.y - p3.y) * (x - p3.x) + (p3.x - p2.x) * (y - p3.y)) / denominator;
-        coordinates[1] =((p3.y - p1.y) * (x - p3.x) + (p1.x - p3.x) * (y - p3.y)) / denominator;
+        int x1 = (int) p1.x;
+        int y1 = (int) p1.y;
+        int x2 = (int) p2.x;
+        int y2 = (int) p2.y;
+        int x3 = (int) p3.x;
+        int y3 = (int) p3.y;
+
+        float denominator = (y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3);
+        coordinates[0] = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
+        coordinates[1] =((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
+
+        coordinates[0] = clamp(coordinates[0]);
+        coordinates[1] = clamp(coordinates[1]);
+
         coordinates[2] = 1.0F - coordinates[0] - coordinates[1];
 
         return coordinates;
